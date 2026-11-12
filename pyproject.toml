@@ -1,0 +1,18 @@
+[project]
+name = "script2play"
+version = "0.1.0"
+description = "Inference client for the Script2Play vision-language-action checkpoints"
+requires-python = ">=3.10"
+dependencies = ["requests", "pillow", "numpy"]
+
+[project.optional-dependencies]
+serve = ["vllm==0.26.0"]
+download = ["huggingface_hub"]
+test = ["pytest"]
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["script2play"]
