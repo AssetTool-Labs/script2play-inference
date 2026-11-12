@@ -14,7 +14,7 @@ weights, ViZDoom and OpenHA land within the reported scores' 95% intervals.
 pip install -e .                       # the client: requests, pillow, numpy
 pip install vllm==0.26.0               # the server (served with vLLM 0.26.0, transformers 5.20.1, torch 2.11)
 
-bash scripts/download_checkpoint.sh HF_REPO_ID   # 8.5 GB into checkpoints/script2play-4b
+bash scripts/download_checkpoint.sh    # 8.5 GB into checkpoints/script2play-4b
 CUDA_VISIBLE_DEVICES=0 bash scripts/serve.sh checkpoints/script2play-4b 8000
 
 python -m script2play --base-url http://127.0.0.1:8000/v1 \
@@ -22,7 +22,8 @@ python -m script2play --base-url http://127.0.0.1:8000/v1 \
     --task "Defend the center: shoot the enemies closing in from all directions."
 ```
 
-The weights will be released on Hugging Face; `HF_REPO_ID` is their repository there.
+The weights are [WenchaoMa1/Script2Play-4B](https://huggingface.co/WenchaoMa1/Script2Play-4B) on
+Hugging Face, private for now: `hf auth login` with an account that has access first.
 
 From Python:
 
