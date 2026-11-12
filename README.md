@@ -4,9 +4,9 @@ Inference for **Script2Play-4B**, the Qwen3.5-4B vision-language-action model of
 Generation to Game Playing: Fully Automated Ability Training for VLA Models*. It plays games from
 the screen: one frame and a task in, the next 200 ms of keyboard and mouse out.
 
-The client sends exactly the request the reported scores were measured with, and
-[benchmarks/](benchmarks/README.md) reruns them: from a fresh clone of this code with the same
-weights, ViZDoom and OpenHA land within the reported scores' 95% intervals.
+The client sends exactly the request the paper's evaluations used, and
+[benchmarks/](benchmarks/README.md) describes how to set up ViZDoom, OpenHA and OmniGameArena
+with it.
 
 ## Quick start
 
@@ -88,21 +88,17 @@ Qwen3.5-4B-Base post-trained by behavior cloning on 150.3 h of verified scripted
 demonstrations: 26.9 h of Minecraft and 123.4 h of generated Roblox games. No ViZDoom or UE5
 gameplay is in the training data, and no human gameplay, RL or DAgger is used.
 
-## Scores
+## Evaluation
 
-ViZDoom (GameWAM's 4 maps, 50 episodes each, mean reward):
+[benchmarks/README.md](benchmarks/README.md) gives the setup for each benchmark, run as in the
+paper:
 
-| Model | battle1 | battle2 | defend_the_line | defend_the_center | Mean |
-|---|---|---|---|---|---|
-| **Script2Play-4B** | 17.00 | 4.08 | 22.94 | 7.66 | 12.92 |
-| Game-TARS MoE-mini (zero-shot) | 18.87 | 10.04 | 15.24 | 14.00 | 14.54 |
-| GameWAM (trained on ViZDoom) | 43.12 | 19.02 | 23.52 | 15.36 | 25.26 |
-
-OpenHA (instructed, success rate, %): Embodied 63.9, GUI 66.4, Combat 78.6, average 69.6
-(all801), eval255 67.5.
-
-OmniGameArena (5 solo games, normalized score, time-paused protocol): ObstacleRun3D 0.374,
-LastStand 0.436, MonsterShoot 0.972, SceneEscape 0.420, CueChase 1.000, mean 0.640.
+- **ViZDoom**: GameWAM's four maps (battle1, battle2, defend_the_line, defend_the_center), 50
+  episodes each, with `benchmarks/vizdoom/eval_gamewam.py` on a GameWAM checkout.
+- **OpenHA**: Minecraft instruction following (all801 and its eval255 subset, 2 episodes a task)
+  in MineStudio, with the runner, scorer and suites in `benchmarks/openha/`.
+- **OmniGameArena**: five UE5 solo games under the time-paused protocol, with the per-game prompt
+  labels, key sets and mouse mapping to give the benchmark's agent.
 
 ## Layout
 
@@ -110,4 +106,4 @@ LastStand 0.436, MonsterShoot 0.972, SceneEscape 0.420, CueChase 1.000, mean 0.6
   and its timed `Step`s; `prompt.py` and `actions.py`: the training prompt and action grammar.
 - `scripts/serve.sh`, `scripts/download_checkpoint.sh`; `tests/` (`pytest`).
 - `benchmarks/`: `vizdoom/eval_gamewam.py`; `openha/` (OpenHA runner, scorer and task suites, with
-  `agent.py` on this client); the OmniGameArena settings in `benchmarks/README.md`.
+  `agent.py` on this client); the setup of all three benchmarks in `benchmarks/README.md`.
