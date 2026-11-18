@@ -1,8 +1,9 @@
 # Script2Play inference
 
 Inference for **Script2Play-4B**, the Qwen3.5-4B vision-language-action model of *From Game
-Generation to Game Playing: Fully Automated Ability Training for VLA Models*. It plays games from
-the screen: one frame and a task in, the next 200 ms of keyboard and mouse out.
+Generation to Game Playing: Fully Automated Ability Training for VLA Models*
+([paper](https://arxiv.org/abs/2611.11136), [project page](https://assettool-labs.github.io/script2play/)).
+It plays games from the screen: one frame and a task in, the next 200 ms of keyboard and mouse out.
 
 The client sends exactly the request the paper's evaluations used, and
 [benchmarks/](benchmarks/README.md) describes how to set up ViZDoom, OpenHA and OmniGameArena
@@ -22,8 +23,8 @@ python -m script2play --base-url http://127.0.0.1:8000/v1 \
     --task "Defend the center: shoot the enemies closing in from all directions."
 ```
 
-The weights are [WenchaoMa1/Script2Play-4B](https://huggingface.co/WenchaoMa1/Script2Play-4B) on
-Hugging Face, private for now: `hf auth login` with an account that has access first.
+The weights are [GameIntelligenceLab/Script2Play-4B](https://huggingface.co/GameIntelligenceLab/Script2Play-4B)
+on Hugging Face, private for now: `hf auth login` with an account that has access first.
 
 From Python:
 
